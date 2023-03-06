@@ -1,0 +1,4 @@
+namespace: orp-pst
+
+resources:
+- postgres.yaml
