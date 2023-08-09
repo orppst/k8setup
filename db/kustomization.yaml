@@ -1,4 +1,6 @@
 namespace: orp-pst
 
 resources:
-- postgres.yaml
+- pstdb.yaml
+
+

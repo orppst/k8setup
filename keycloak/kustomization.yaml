@@ -1,0 +1,8 @@
+namespace: orp-pst
+
+resources:
+- postgres.yaml
+- keycloak.yaml
+- keycloak-ingress.yaml
+
+#https://stackoverflow.com/questions/66568194/kustomize-how-to-replace-only-the-host-in-ingress-configuration
