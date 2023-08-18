@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: keycloak
-  namespace: postgres-operator
   labels:
     app.kubernetes.io/name: keycloak
 spec:
@@ -15,35 +14,46 @@ spec:
         app.kubernetes.io/name: keycloak
     spec:
       containers:
-      - image: quay.io/keycloak/keycloak:latest
-        args: ["start-dev"]
+      - image: quay.io/keycloak/keycloak:21.0.1
+        args: ["start-dev", "--log-level=DEBUG"]
         name: keycloak
         env:
-        - name: DB_VENDOR
+        - name: KC_DB_VENDOR
           value: "postgres"
-        - name: DB_ADDR
+        - name: KC_DB_ADDR
           valueFrom: { secretKeyRef: { name: keycloakdb-pguser-keycloakdb, key: host } }
-        - name: DB_PORT
+        - name: KC_DB_PORT
           valueFrom: { secretKeyRef: { name: keycloakdb-pguser-keycloakdb, key: port } }
-        - name: DB_DATABASE
+        - name: KC_DB_DATABASE
           valueFrom: { secretKeyRef: { name: keycloakdb-pguser-keycloakdb, key: dbname } }
-        - name: DB_USER
+        - name: KC_DB_USER
           valueFrom: { secretKeyRef: { name: keycloakdb-pguser-keycloakdb, key: user } }
-        - name: DB_PASSWORD
+        - name: KC_DB_PASSWORD
           valueFrom: { secretKeyRef: { name: keycloakdb-pguser-keycloakdb, key: password } }
         - name: KEYCLOAK_ADMIN
-          value: "admin"
+          valueFrom:
+            secretKeyRef:
+              name: keycloakadm-secret
+              key: username
         - name: KEYCLOAK_ADMIN_PASSWORD
-          value: "admin"
+          valueFrom:
+             secretKeyRef:
+                name: keycloakadm-secret
+                key: username
+# TODO make the proxying more secure, by only exposing what is necessary - https://www.keycloak.org/server/reverseproxy
         - name: KC_PROXY
           value: "edge"
+        - name: KC_HOSTNAME_PATH
+          value: "/aai/"
+        - name: KC_HTTP_RELATIVE_PATH
+          value: "/aai/"
+        - name: KC_STRICT_BACKCHANNEL
+          value: "true"
         ports:
         - name: http
           containerPort: 8080
-        - name: https
-          containerPort: 8443
         readinessProbe:
           httpGet:
-            path: /realms/master
+            path: /aai/realms/master
             port: 8080
       restartPolicy: Always
