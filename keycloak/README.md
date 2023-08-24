@@ -9,7 +9,8 @@ Keycloak needs to be customized in two ways to make it suitable for the proposal
 These customizations are then built into the docker image
 
 ```shell
-docker build -t mykeycloak .
+docker build -t kilburn.jb.man.ac.uk/orppst/keycloak .
+docker image push kilburn.jb.man.ac.uk/orppst/keycloak
 ```
 
 
@@ -25,12 +26,11 @@ The theme is contained within the theme directory - see https://www.keycloak.org
 This is the core of the setup for the orp-pst case - realms can be edited and exported with
 
 ```shell
-docker run -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin -p 127.0.0.1:8080:8080 --name kcorp -it --entrypoint bash mykeycloak
+docker run -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin -p 127.0.0.1:8080:8080 --name kcorp -it --entrypoint bash kilburn.jb.man.ac.uk/orppst/keycloak
 ```
-which will create a container without running keycloak inside it - then start the container
-
+which will create a container without running keycloak inside it - then start the server
 ```shell
-/opt/keycloak/bin/kc.sh start-dev
+/opt/keycloak/bin/kc.sh start-dev --import-realm
 ```
 
 and login to the admin console to make changes to realm http://localhost:8080/admin/ 

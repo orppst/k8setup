@@ -28,6 +28,7 @@ kubectl create secret generic keycloakadm-secret -n orp-pst --from-literal='user
 
 * for now the individual components of the tool are installed from the source code directories with the
 ```shell
+quarkus build -Dquarkus.container-image.push=true --no-tests
 kubectl apply -f build/kubernetes/kubernetes.yml 
 ```
 

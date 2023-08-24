@@ -14,8 +14,8 @@ spec:
         app.kubernetes.io/name: keycloak
     spec:
       containers:
-      - image: quay.io/keycloak/keycloak:21.0.1
-        args: ["start-dev", "--log-level=DEBUG"]
+      - image: kilburn.jb.man.ac.uk/orppst/keycloak:latest
+        args: ["start-dev", "--import-realm", "--log-level=DEBUG"]
         name: keycloak
         env:
         - name: KC_DB_VENDOR
@@ -40,11 +40,11 @@ spec:
              secretKeyRef:
                 name: keycloakadm-secret
                 key: username
-# TODO make the proxying more secure, by only exposing what is necessary - https://www.keycloak.org/server/reverseproxy
+# TODO make the proxying more secure, by only exposing what is necessary - https://www.keycloak.org/server/reverseproxy https://www.keycloak.org/server/all-config
         - name: KC_PROXY
           value: "edge"
-        - name: KC_HOSTNAME_PATH
-          value: "/aai/"
+        - name: KC_HOSTNAME_URL
+          value: "https://kilburn.jb.man.ac.uk/aai/"
         - name: KC_HTTP_RELATIVE_PATH
           value: "/aai/"
         - name: KC_STRICT_BACKCHANNEL
