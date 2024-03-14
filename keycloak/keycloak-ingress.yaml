@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: keycloak
 spec:
+  ingressClassName: nginx
   rules:
      - http:
         paths:
