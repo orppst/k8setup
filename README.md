@@ -18,12 +18,13 @@ kubectl create namespace orp-pst
 kubectl apply -k db
 ```
 * [keycloak](./keycloak) contains keycloak setup for AAI functionality.
-```shell
-kubectl apply -k keycloak
-```
-in order to set up the admin username and password (use different values obviously!)
+  in order to set up the admin username and password (use different values obviously!)
 ```shell
 kubectl create secret generic keycloakadm-secret -n orp-pst --from-literal='username=adm' --from-literal='password=adm'
+```
+then create
+```shell
+kubectl apply -k keycloak
 ```
 
 * for now the individual components of the tool are installed from the source code directories with the
@@ -32,6 +33,19 @@ quarkus build -Dquarkus.container-image.push=true --no-tests
 kubectl apply -f build/kubernetes/kubernetes.yml 
 ```
 
+*N.B. for any image pushes it is necessary to login to the repository first*
+
+if building on ARM Mac then cannot build and push directly in one go - need to build with the correct arch.
+```shell
+quarkus build -Dquarkus.docker.buildx.platform=linux/amd64 --no-tests
+docker push kilburn.jb.man.ac.uk/orppst/pst-gui:0.1
+```
+
+
+
+```shell
+docker login -u pahjbo https://kilburn.jb.man.ac.uk   
+```
 
 ## Minikube notes
 

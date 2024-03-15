@@ -6,10 +6,17 @@ Keycloak needs to be customized in two ways to make it suitable for the proposal
 * a realm is added that has the authorization setup 
 * a theme is created so that the login screen has the same look and feel as the proposal tool
 
-These customizations are then built into the docker image
+These customizations are then built into the docker image 
+
+need to login to the repo first
 
 ```shell
-docker build -t kilburn.jb.man.ac.uk/orppst/keycloak .
+docker login -u pahjbo https://kilburn.jb.man.ac.uk 
+```
+then 
+
+```shell
+docker build --platform linux/amd64  -t kilburn.jb.man.ac.uk/orppst/keycloak .
 docker image push kilburn.jb.man.ac.uk/orppst/keycloak
 ```
 
