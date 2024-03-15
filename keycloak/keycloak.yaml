@@ -48,7 +48,7 @@ spec:
         - name: KC_HTTP_RELATIVE_PATH
           value: "/aai/"
         - name: KC_HOSTNAME_STRICT_BACKCHANNEL
-          value: "true"
+          value: "false"
         - name: KC_HOSTNAME_STRICT
           value: "true"
         ports:
