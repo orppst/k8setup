@@ -39,7 +39,7 @@ spec:
           valueFrom:
              secretKeyRef:
                 name: keycloakadm-secret
-                key: username
+                key: password
 # TODO make the proxying more secure, by only exposing what is necessary -https://www.keycloak.org/server/hostname https://www.keycloak.org/server/reverseproxy https://www.keycloak.org/server/all-config
         - name: KC_PROXY
           value: "edge"
