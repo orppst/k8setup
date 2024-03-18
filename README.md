@@ -11,7 +11,7 @@ created as below
 kubectl create namespace orp-pst
 ```
 
-
+The database k8s operator that is used is [crunchydata]\(https://access.crunchydata.com/documentation/postgres-operator/latest)
 
 * [db](./db) contains postgres setup for the database functionality.
 ```shell

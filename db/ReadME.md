@@ -8,10 +8,10 @@ has been installed into the k8 cluster.
 via helm https://access.crunchydata.com/documentation/postgres-operator/latest/installation/helm
 
 ```shell
-helm install pgo oci://registry.developers.crunchydata.com/crunchydata/pgo
+helm install -n pgo pgo oci://registry.developers.crunchydata.com/crunchydata/pgo
 ```
 
-
+it is possible to run a PGAdmin instance too for the db https://access.crunchydata.com/documentation/postgres-operator/latest/architecture/postgrescluster-scoped-pgadmin-4
 
 
 

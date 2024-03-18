@@ -55,6 +55,26 @@ docker cp kcorp:/tmp/orppst-realm.json ./
 ```
 
 
+# attaching to DB on K8 cluster
+
+need to get a port-forward
+```shell
+PG_CLUSTER_PRIMARY_POD=$(kubectl get pod -n orp-pst -o name \
+  -l postgres-operator.crunchydata.com/cluster=keycloakdb,postgres-operator.crunchydata.com/role=master)
+kubectl -n  orp-pst  port-forward "${PG_CLUSTER_PRIMARY_POD}" 5432:5432 &
+```
+
+then connect
+```shell
+PG_CLUSTER_USER_SECRET_NAME=keycloakdb-pguser-keycloakdb
+PGPASSWORD=$(kubectl get secrets -n orp-pst "${PG_CLUSTER_USER_SECRET_NAME}" -o go-template='{{.data.password | base64decode}}')  \
+PGUSER=$(kubectl get secrets -n orp-pst "${PG_CLUSTER_USER_SECRET_NAME}" -o go-template='{{.data.user | base64decode}}') \
+PGDATABASE=$(kubectl get secrets -n orp-pst "${PG_CLUSTER_USER_SECRET_NAME}" -o go-template='{{.data.dbname | base64decode}}') \
+psql -h localhost
+
+```
+
+
 
 
 
