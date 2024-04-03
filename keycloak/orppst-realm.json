@@ -47,6 +47,14 @@
   "failureFactor" : 30,
   "roles" : {
     "realm" : [ {
+      "id" : "8605d353-b5d8-4c90-8abd-a121bebaff25",
+      "name" : "tac_admin",
+      "description" : "can perform various TAC admin",
+      "composite" : false,
+      "clientRole" : false,
+      "containerId" : "e428824d-d9db-4b13-bc45-1032572700f4",
+      "attributes" : { }
+    }, {
       "id" : "8e4426e1-3b37-4264-b0cd-b4fcaf51c861",
       "name" : "default-roles-orppst",
       "description" : "${role_default-roles}",
@@ -57,14 +65,6 @@
           "account" : [ "view-profile", "manage-account" ]
         }
       },
-      "clientRole" : false,
-      "containerId" : "e428824d-d9db-4b13-bc45-1032572700f4",
-      "attributes" : { }
-    }, {
-      "id" : "925ef877-2846-4871-878d-fecf97ed10fb",
-      "name" : "proposal_reviewer",
-      "description" : "able to review proposals",
-      "composite" : false,
       "clientRole" : false,
       "containerId" : "e428824d-d9db-4b13-bc45-1032572700f4",
       "attributes" : { }
@@ -85,9 +85,9 @@
       "containerId" : "e428824d-d9db-4b13-bc45-1032572700f4",
       "attributes" : { }
     }, {
-      "id" : "79a12c24-54e1-46fd-8b2b-96a44e3a8188",
-      "name" : "tac_editor",
-      "description" : "can change tac membership",
+      "id" : "a5310367-0ca8-40c8-8694-e36250d655db",
+      "name" : "tac_member",
+      "description" : "A member of the time allocation committee",
       "composite" : false,
       "clientRole" : false,
       "containerId" : "e428824d-d9db-4b13-bc45-1032572700f4",
@@ -378,10 +378,10 @@
     "id" : "c0f45657-08c9-4fb5-8e6a-3f44082055e5",
     "name" : "e-MERLIN",
     "path" : "/e-MERLIN",
+    "subGroups" : [ ],
     "attributes" : { },
     "realmRoles" : [ "obs_administration" ],
-    "clientRoles" : { },
-    "subGroups" : [ ]
+    "clientRoles" : { }
   } ],
   "defaultRole" : {
     "id" : "8e4426e1-3b37-4264-b0cd-b4fcaf51c861",
@@ -399,7 +399,8 @@
   "otpPolicyLookAheadWindow" : 1,
   "otpPolicyPeriod" : 30,
   "otpPolicyCodeReusable" : false,
-  "otpSupportedApplications" : [ "totpAppGoogleName", "totpAppMicrosoftAuthenticatorName", "totpAppFreeOTPName" ],
+  "otpSupportedApplications" : [ "totpAppFreeOTPName", "totpAppGoogleName", "totpAppMicrosoftAuthenticatorName" ],
+  "localizationTexts" : { },
   "webAuthnPolicyRpEntityName" : "keycloak",
   "webAuthnPolicySignatureAlgorithms" : [ "ES256" ],
   "webAuthnPolicyRpId" : "",
@@ -410,6 +411,7 @@
   "webAuthnPolicyCreateTimeout" : 0,
   "webAuthnPolicyAvoidSameAuthenticatorRegister" : false,
   "webAuthnPolicyAcceptableAaguids" : [ ],
+  "webAuthnPolicyExtraOrigins" : [ ],
   "webAuthnPolicyPasswordlessRpEntityName" : "keycloak",
   "webAuthnPolicyPasswordlessSignatureAlgorithms" : [ "ES256" ],
   "webAuthnPolicyPasswordlessRpId" : "",
@@ -420,6 +422,7 @@
   "webAuthnPolicyPasswordlessCreateTimeout" : 0,
   "webAuthnPolicyPasswordlessAvoidSameAuthenticatorRegister" : false,
   "webAuthnPolicyPasswordlessAcceptableAaguids" : [ ],
+  "webAuthnPolicyPasswordlessExtraOrigins" : [ ],
   "users" : [ {
     "id" : "33767eee-35a1-4fef-b32a-f9b6fa6b36e6",
     "createdTimestamp" : 1681240364459,
@@ -588,7 +591,7 @@
     } ],
     "disableableCredentialTypes" : [ ],
     "requiredActions" : [ ],
-    "realmRoles" : [ "default-roles-orppst", "tac_editor" ],
+    "realmRoles" : [ "tac_admin", "default-roles-orppst" ],
     "notBefore" : 0,
     "groups" : [ "/e-MERLIN" ]
   }, {
@@ -611,7 +614,7 @@
     } ],
     "disableableCredentialTypes" : [ ],
     "requiredActions" : [ ],
-    "realmRoles" : [ "default-roles-orppst" ],
+    "realmRoles" : [ "default-roles-orppst", "tac_member" ],
     "notBefore" : 0,
     "groups" : [ ]
   } ],
@@ -1536,6 +1539,7 @@
   "browserSecurityHeaders" : {
     "contentSecurityPolicyReportOnly" : "",
     "xContentTypeOptions" : "nosniff",
+    "referrerPolicy" : "no-referrer",
     "xRobotsTag" : "none",
     "xFrameOptions" : "SAMEORIGIN",
     "contentSecurityPolicy" : "frame-src 'self'; frame-ancestors 'self'; object-src 'none';",
@@ -1606,7 +1610,7 @@
       "subType" : "authenticated",
       "subComponents" : { },
       "config" : {
-        "allowed-protocol-mapper-types" : [ "oidc-full-name-mapper", "saml-user-attribute-mapper", "saml-user-property-mapper", "oidc-sha256-pairwise-sub-mapper", "oidc-address-mapper", "oidc-usermodel-property-mapper", "oidc-usermodel-attribute-mapper", "saml-role-list-mapper" ]
+        "allowed-protocol-mapper-types" : [ "saml-role-list-mapper", "oidc-full-name-mapper", "oidc-sha256-pairwise-sub-mapper", "saml-user-attribute-mapper", "saml-user-property-mapper", "oidc-usermodel-attribute-mapper", "oidc-address-mapper", "oidc-usermodel-property-mapper" ]
       }
     }, {
       "id" : "0ba88f4e-563e-4aab-b42f-6b1eaf6292bd",
@@ -1622,7 +1626,7 @@
       "subType" : "anonymous",
       "subComponents" : { },
       "config" : {
-        "allowed-protocol-mapper-types" : [ "saml-user-property-mapper", "oidc-usermodel-attribute-mapper", "oidc-usermodel-property-mapper", "oidc-sha256-pairwise-sub-mapper", "saml-user-attribute-mapper", "oidc-full-name-mapper", "oidc-address-mapper", "saml-role-list-mapper" ]
+        "allowed-protocol-mapper-types" : [ "oidc-address-mapper", "saml-role-list-mapper", "oidc-usermodel-property-mapper", "oidc-sha256-pairwise-sub-mapper", "saml-user-attribute-mapper", "saml-user-property-mapper", "oidc-full-name-mapper", "oidc-usermodel-attribute-mapper" ]
       }
     } ],
     "org.keycloak.userprofile.UserProfileProvider" : [ {
@@ -1699,35 +1703,6 @@
       "priority" : 20,
       "autheticatorFlow" : true,
       "flowAlias" : "Verify Existing Account by Re-authentication",
-      "userSetupAllowed" : false
-    } ]
-  }, {
-    "id" : "efb28772-196e-4d74-b079-616d51de2f35",
-    "alias" : "Authentication Options",
-    "description" : "Authentication options.",
-    "providerId" : "basic-flow",
-    "topLevel" : false,
-    "builtIn" : true,
-    "authenticationExecutions" : [ {
-      "authenticator" : "basic-auth",
-      "authenticatorFlow" : false,
-      "requirement" : "REQUIRED",
-      "priority" : 10,
-      "autheticatorFlow" : false,
-      "userSetupAllowed" : false
-    }, {
-      "authenticator" : "basic-auth-otp",
-      "authenticatorFlow" : false,
-      "requirement" : "DISABLED",
-      "priority" : 20,
-      "autheticatorFlow" : false,
-      "userSetupAllowed" : false
-    }, {
-      "authenticator" : "auth-spnego",
-      "authenticatorFlow" : false,
-      "requirement" : "DISABLED",
-      "priority" : 30,
-      "autheticatorFlow" : false,
       "userSetupAllowed" : false
     } ]
   }, {
@@ -2047,28 +2022,6 @@
       "userSetupAllowed" : false
     } ]
   }, {
-    "id" : "465f33f7-83cf-4d6d-b214-c5dee5c74300",
-    "alias" : "http challenge",
-    "description" : "An authentication flow based on challenge-response HTTP Authentication Schemes",
-    "providerId" : "basic-flow",
-    "topLevel" : true,
-    "builtIn" : true,
-    "authenticationExecutions" : [ {
-      "authenticator" : "no-cookie-redirect",
-      "authenticatorFlow" : false,
-      "requirement" : "REQUIRED",
-      "priority" : 10,
-      "autheticatorFlow" : false,
-      "userSetupAllowed" : false
-    }, {
-      "authenticatorFlow" : true,
-      "requirement" : "REQUIRED",
-      "priority" : 20,
-      "autheticatorFlow" : true,
-      "flowAlias" : "Authentication Options",
-      "userSetupAllowed" : false
-    } ]
-  }, {
     "id" : "5e03271f-11d1-42fd-aecd-52ea65ef5f20",
     "alias" : "registration",
     "description" : "registration flow",
@@ -2096,13 +2049,6 @@
       "authenticatorFlow" : false,
       "requirement" : "REQUIRED",
       "priority" : 20,
-      "autheticatorFlow" : false,
-      "userSetupAllowed" : false
-    }, {
-      "authenticator" : "registration-profile-action",
-      "authenticatorFlow" : false,
-      "requirement" : "REQUIRED",
-      "priority" : 40,
       "autheticatorFlow" : false,
       "userSetupAllowed" : false
     }, {
@@ -2280,7 +2226,7 @@
     "frontendUrl" : "",
     "acr.loa.map" : "[]"
   },
-  "keycloakVersion" : "21.1.2",
+  "keycloakVersion" : "23.0.6",
   "userManagedAccessAllowed" : false,
   "clientProfiles" : {
     "profiles" : [ ]
