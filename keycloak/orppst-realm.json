@@ -782,7 +782,7 @@
       "client.secret.creation.time" : "1681281541",
       "login_theme" : "orppst",
       "post.logout.redirect.uris" : "+",
-      "oauth2.device.authorization.grant.enabled" : "false",
+      "oauth2.device.authorization.grant.enabled" : "true",
       "logoUri" : "https://www.orp-h2020.eu/sites/default/files/INSU-Opticon-Radionet-logo-web_small_0_0.jpg",
       "use.jwks.url" : "false",
       "backchannel.logout.revoke.offline.tokens" : "false",
