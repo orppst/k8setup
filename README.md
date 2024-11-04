@@ -27,6 +27,11 @@ then create
 kubectl apply -k keycloak
 ```
 
+* need to set up storage
+```shell
+kubectl apply -k storage
+```
+
 * for now the individual components of the tool are installed from the source code directories with the
 ```shell
 quarkus build -Dquarkus.container-image.push=true --no-tests

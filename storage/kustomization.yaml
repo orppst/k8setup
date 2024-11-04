@@ -1,0 +1,6 @@
+namespace: orp-pst
+
+resources:
+- store.yaml
+
+
