@@ -43,7 +43,7 @@ kubectl apply -f build/kubernetes/kubernetes.yml
 if building on ARM Mac then cannot build and push directly in one go - need to build with the correct arch.
 ```shell
 quarkus build -Dquarkus.docker.buildx.platform=linux/amd64 --no-tests
-docker push kilburn.jb.man.ac.uk/orppst/pst-gui:0.1
+docker push kilburn.jb.man.ac.uk/orppst/pst-gui:0.5
 ```
 
 
