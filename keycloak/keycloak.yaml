@@ -44,7 +44,7 @@ spec:
         - name: KC_PROXY
           value: "edge"
         - name: KC_HOSTNAME
-          value: "kilburn.jb.man.ac.uk"
+          value: "proposal.e-merlin.ac.uk"
         - name: KC_HTTP_RELATIVE_PATH
           value: "/aai/"
         - name: KC_HOSTNAME_STRICT_BACKCHANNEL
