@@ -25,6 +25,10 @@ spec:
             resources:
               requests:
                 storage: 2Gi
+      manual:
+        repoName: repo1
+        options:
+          - --type=full
   userInterface:
     pgAdmin:
       image: registry.developers.crunchydata.com/crunchydata/crunchy-pgadmin4:ubi8-4.30-19
